@@ -63,11 +63,9 @@ export class PersonComponent implements OnInit {
 
     loadPersons(): void {
         this.indLoading = true;
-        this._personService.get("http://localhost:60324/api/person/GetAll")
+        this._personService.get("http://localhost:60324/api/persons")
             .subscribe(persons => { this.persons = persons; this.indLoading = false; this.persons.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1); },
             error => this.msg = <any>error);
-
-
     }
 
     setControlsState(isEnable: boolean) {
@@ -125,7 +123,7 @@ export class PersonComponent implements OnInit {
 
         switch (this.dbops) {
             case DBOperation.create:
-                this._personService.post("http://localhost:60324/api/person/Create", formData._value).subscribe(
+                this._personService.post("http://localhost:60324/api/persons", formData._value).subscribe(
                     data => {
                         if (data != null) //Success
                         {
@@ -143,7 +141,7 @@ export class PersonComponent implements OnInit {
                 );
                 break;
             case DBOperation.update:
-                this._personService.put("http://localhost:60324/api/person/Update/", formData._value.id, formData._value).subscribe(
+                this._personService.put("http://localhost:60324/api/persons/", formData._value.id, formData._value).subscribe(
                     data => {
                         if (data != null) //Success
                         {
@@ -162,7 +160,7 @@ export class PersonComponent implements OnInit {
                 );
                 break;
             case DBOperation.delete:
-                this._personService.delete("http://localhost:60324/api/person/Delete/", formData._value.id).subscribe(
+                this._personService.delete("http://localhost:60324/api/persons/", formData._value.id).subscribe(
                     data => {
                         if (data == null) //Success
                         {

@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace CegekaBDayPlatform.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/persons")]
     public class PersonController : Controller
     {
         private static PersonService _service;
@@ -19,14 +19,14 @@ namespace CegekaBDayPlatform.Controllers
             _service = new PersonService(context);
         }
 
-        // GET api/person/GetAll
-        [HttpGet("GetAll")]
+        // GET api/persons
+        [HttpGet("")]
         public IActionResult GetAll()
         {
             return new ObjectResult(_service.GetAllPersons());
         }
 
-        // GET api/person/Upcomming
+        // GET api/persons/Upcomming
         [HttpGet("Upcomming")]
         public IActionResult Upcomming()
         {
@@ -40,21 +40,21 @@ namespace CegekaBDayPlatform.Controllers
             return new ObjectResult(_service.GetUpcommingBirthDays(count));
         }
 
-        // POST api/person/Create
-        [HttpPost("Create")]
+        // POST api/persons
+        [HttpPost("")]
         public IActionResult Create([FromBody]Person value)
         {
             return new ObjectResult(_service.CreatePerson(value));
         }
 
-        [HttpPut("Update/{id}")]
+        [HttpPut("{id}")]
         public IActionResult Update(Guid id, [FromBody]Person value)
         {
             value.Id = id;
             return new ObjectResult(_service.UpdatePerson(value));
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             return new ObjectResult(_service.DeletePerson(id));
