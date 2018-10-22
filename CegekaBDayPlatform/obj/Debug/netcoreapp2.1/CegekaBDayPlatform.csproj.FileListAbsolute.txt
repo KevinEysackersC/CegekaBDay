@@ -1,0 +1,11 @@
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\bin\Debug\netcoreapp2.1\CegekaBDayPlatform.deps.json
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\bin\Debug\netcoreapp2.1\CegekaBDayPlatform.runtimeconfig.json
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\bin\Debug\netcoreapp2.1\CegekaBDayPlatform.runtimeconfig.dev.json
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\bin\Debug\netcoreapp2.1\CegekaBDayPlatform.dll
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\bin\Debug\netcoreapp2.1\CegekaBDayPlatform.pdb
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.csprojAssemblyReference.cache
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.csproj.CoreCompileInputs.cache
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.AssemblyInfoInputs.cache
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.AssemblyInfo.cs
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.dll
+C:\Users\keviney\Source\Repos\CegekaBDay\CegekaBDayPlatform\obj\Debug\netcoreapp2.1\CegekaBDayPlatform.pdb
