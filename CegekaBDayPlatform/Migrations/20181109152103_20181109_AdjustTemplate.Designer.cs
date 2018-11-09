@@ -11,9 +11,10 @@ using System;
 namespace CegekaBDayPlatform.Migrations
 {
     [DbContext(typeof(CegekaBDayPlatformContext))]
-    partial class CegekaBDayPlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20181109152103_20181109_AdjustTemplate")]
+    partial class _20181109_AdjustTemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
