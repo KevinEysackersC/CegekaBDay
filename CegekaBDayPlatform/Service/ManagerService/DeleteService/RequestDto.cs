@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace CegekaBDayPlatform.Service.ManagerService.CreateService
+namespace CegekaBDayPlatform.Service.ManagerService.DeleteService
 {
     public class RequestDto
     {
-        public Guid PersonId { get; set; }
+        public Guid Id { get; set; }
 
         public static bool IsValid(RequestDto dto)
         {
-            if( dto == null)
+            if (dto == null)
             {
                 return false;
             }
@@ -16,6 +16,4 @@ namespace CegekaBDayPlatform.Service.ManagerService.CreateService
             return true;
         }
     }
-
-    
 }

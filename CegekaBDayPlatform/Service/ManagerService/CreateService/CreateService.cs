@@ -5,11 +5,11 @@ namespace CegekaBDayPlatform.Service.ManagerService.CreateService
 {
     public class CreateService
     {
-        private PersonRepository _personRepository;
+        private ManagerRepository _managerRepository;
 
         public CreateService(CegekaBDayPlatformContext context)
         {
-            _personRepository = new PersonRepository(context);
+            _managerRepository = new ManagerRepository(context);
         }
 
         public ResponseDto Process(RequestDto request)
@@ -19,16 +19,12 @@ namespace CegekaBDayPlatform.Service.ManagerService.CreateService
                 return null;
             }
 
-
-            var person = new Person
+            var manager = new Manager
             {
-                Name = request.Name,
-                FirstName = request.FirstName,
-                DateOfBirth = request.DateOfBirth,
-                ManagerId = request.ManagerId
+               PersonId = request.PersonId
             };
-            var createdPerson = _personRepository.CreatePerson(person);
-            var result = new ResponseDto { Id = createdPerson.Id };
+            var created = _managerRepository.Create(manager);
+            var result = new ResponseDto { Id = created.Id };
             return result;
         }
 

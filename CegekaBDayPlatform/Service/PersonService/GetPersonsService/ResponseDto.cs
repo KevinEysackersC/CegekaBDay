@@ -7,15 +7,6 @@ namespace CegekaBDayPlatform.Service.PersonService.GetPersonsService
     {
         public ICollection<PersonResponse> Persons { get; set; }
 
-        public static bool IsValid(RequestDto dto)
-        {
-            if (dto == null)
-            {
-                return false;
-            }
-
-            return true;
-        }
     }
 
     public class PersonResponse
