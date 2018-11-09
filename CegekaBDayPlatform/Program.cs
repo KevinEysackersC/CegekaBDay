@@ -16,14 +16,16 @@ namespace CegekaBDayPlatform
         {
             var config = new ConfigurationBuilder().AddEnvironmentVariables("").Build();
 
-            var url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
-            BuildWebHost(args, url).Run();
+            //var url = config["ASPNETCORE_URLS"] ?? "http://*:8080";
+            // BuildWebHost(args, url).Run();
+
+            BuildWebHost(args).Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args, string url) =>
+        public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls(url)
+               // .UseUrls(url)
                 .Build();
     }
 }

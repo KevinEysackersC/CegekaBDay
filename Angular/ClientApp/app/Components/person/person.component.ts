@@ -16,18 +16,24 @@ import { IMyDpOptions } from 'mydatepicker';
 export class PersonComponent implements OnInit {
     @ViewChild('FirstName') elFirstName: ElementRef;
     @ViewChild('modal') modal: ModalComponent;
-    persons: IPerson[];
-    person: IPerson;
-    msg: string;
+    persons: IPerson[] | undefined;
+    person: IPerson | undefined;
+    msg: string = "";
     indLoading: boolean = false;
     personFrm: FormGroup;
-    dbops: DBOperation;
-    modalTitle: string;
-    modalBtnTitle: string;
+    dbops: DBOperation | undefined;
+    modalTitle: string | undefined;
+    modalBtnTitle: string | undefined;
     currentDate: Date = new Date();
 
     constructor(private fb: FormBuilder, private _personService: PersonService) {
-
+        this.personFrm = this.fb.group({
+            id: [''],
+            firstName: ['', Validators.required],
+            name: ['', Validators.required],
+            dateOfBirth: ['', Validators.required]
+        });
+        this.loadPersons();
     }
 
     public myDatePickerOptions: IMyDpOptions = {
@@ -36,13 +42,8 @@ export class PersonComponent implements OnInit {
     };
 
     ngOnInit(): void {
-        this.personFrm = this.fb.group({
-            id: [''],
-            firstName: ['', Validators.required],
-            name: ['', Validators.required],
-            dateOfBirth: ['', Validators.required]
-        });
-        this.loadPersons();
+
+
     }
 
     setDate(date: Date): void {
@@ -64,8 +65,12 @@ export class PersonComponent implements OnInit {
     loadPersons(): void {
         this.indLoading = true;
         this._personService.get("http://localhost:60324/api/persons")
-            .subscribe(persons => { this.persons = persons; this.indLoading = false; this.persons.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1); },
-            error => this.msg = <any>error);
+            .subscribe(persons => {
+                this.persons = persons.persons;
+                this.indLoading = false;
+                persons.persons.sort((a: any, b: any) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+            },
+                error => this.msg = <any>error);
     }
 
     setControlsState(isEnable: boolean) {
@@ -92,9 +97,11 @@ export class PersonComponent implements OnInit {
         this.setControlsState(true);
         this.modalTitle = "Edit Person";
         this.modalBtnTitle = "Update";
-        this.person = this.persons.filter(x => x.id == id)[0];
-        this.personFrm.setValue(this.person);
-        this.setDate(new Date(this.person.dateOfBirth));
+        this.person = this.persons != undefined ? this.persons.filter(x => x.id == id)[0] : undefined;
+        if (this.person != undefined) {
+            this.personFrm.patchValue(this.person);
+            this.setDate(new Date(this.person.dateOfBirth));
+        }
         this.modal.open();
 
     }
@@ -104,8 +111,10 @@ export class PersonComponent implements OnInit {
         this.setControlsState(false);
         this.modalTitle = "Confirm to Delete?";
         this.modalBtnTitle = "Delete";
-        this.person = this.persons.filter(x => x.id == id)[0];
-        this.personFrm.setValue(this.person);
+        this.person = this.persons != undefined ? this.persons.filter(x => x.id == id)[0] : undefined;
+        if (this.person != undefined) {
+            this.personFrm.setValue(this.person);
+        }
         this.modal.open();
     }
 
@@ -119,7 +128,7 @@ export class PersonComponent implements OnInit {
                 formData.value.dateOfBirth.date.day.toString();
         }
 
-        console.log(formData._value);
+        //console.log(formData._value);
 
         switch (this.dbops) {
             case DBOperation.create:

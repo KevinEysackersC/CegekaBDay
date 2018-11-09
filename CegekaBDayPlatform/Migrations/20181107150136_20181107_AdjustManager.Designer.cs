@@ -11,9 +11,10 @@ using System;
 namespace CegekaBDayPlatform.Migrations
 {
     [DbContext(typeof(CegekaBDayPlatformContext))]
-    partial class CegekaBDayPlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20181107150136_20181107_AdjustManager")]
+    partial class _20181107_AdjustManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +30,8 @@ namespace CegekaBDayPlatform.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PersonId");
+
                     b.ToTable("Managers");
                 });
 
@@ -41,13 +44,9 @@ namespace CegekaBDayPlatform.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<Guid?>("ManagerId");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Persons");
                 });
@@ -112,11 +111,12 @@ namespace CegekaBDayPlatform.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("CegekaBDayPlatform.Model.Person", b =>
+            modelBuilder.Entity("CegekaBDayPlatform.Model.Manager", b =>
                 {
-                    b.HasOne("CegekaBDayPlatform.Model.Manager", "Manager")
-                        .WithMany("Persons")
-                        .HasForeignKey("ManagerId");
+                    b.HasOne("CegekaBDayPlatform.Model.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CegekaBDayPlatform.Model.Template", b =>

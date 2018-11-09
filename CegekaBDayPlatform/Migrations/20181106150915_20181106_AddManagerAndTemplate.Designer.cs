@@ -11,9 +11,10 @@ using System;
 namespace CegekaBDayPlatform.Migrations
 {
     [DbContext(typeof(CegekaBDayPlatformContext))]
-    partial class CegekaBDayPlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20181106150915_20181106_AddManagerAndTemplate")]
+    partial class _20181106_AddManagerAndTemplate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +26,13 @@ namespace CegekaBDayPlatform.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("PersonId");
+                    b.Property<Guid?>("PersonId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PersonId")
+                        .IsUnique()
+                        .HasFilter("[PersonId] IS NOT NULL");
 
                     b.ToTable("Managers");
                 });
@@ -41,13 +46,9 @@ namespace CegekaBDayPlatform.Migrations
 
                     b.Property<string>("FirstName");
 
-                    b.Property<Guid?>("ManagerId");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ManagerId");
 
                     b.ToTable("Persons");
                 });
@@ -112,11 +113,11 @@ namespace CegekaBDayPlatform.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("CegekaBDayPlatform.Model.Person", b =>
+            modelBuilder.Entity("CegekaBDayPlatform.Model.Manager", b =>
                 {
-                    b.HasOne("CegekaBDayPlatform.Model.Manager", "Manager")
-                        .WithMany("Persons")
-                        .HasForeignKey("ManagerId");
+                    b.HasOne("CegekaBDayPlatform.Model.Person", "Person")
+                        .WithOne("Manager")
+                        .HasForeignKey("CegekaBDayPlatform.Model.Manager", "PersonId");
                 });
 
             modelBuilder.Entity("CegekaBDayPlatform.Model.Template", b =>

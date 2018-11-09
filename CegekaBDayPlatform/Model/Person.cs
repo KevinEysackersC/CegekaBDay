@@ -9,5 +9,7 @@ namespace CegekaBDayPlatform.Model
         public string Name { get; set; }
         public string FirstName { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public Guid? ManagerId { get; set; }
+        public Manager Manager { get; set; }
     }
 }

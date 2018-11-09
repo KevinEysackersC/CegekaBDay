@@ -5,3 +5,7 @@
     dateOfBirth: Date,
     birthdayToday: Boolean
 }
+
+export interface IPersons {
+    persons: IPerson[]
+}

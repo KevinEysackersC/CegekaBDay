@@ -1,63 +1,76 @@
 ﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using CegekaBDayPlatform.Model;
-using CegekaBDayPlatform.Service;
+using CreatePersonServiceDto = CegekaBDayPlatform.Service.PersonService.CreatePersonService;
+using DeletePersonServiceDto = CegekaBDayPlatform.Service.PersonService.DeletePersonService;
+using GetPersonsServiceDto = CegekaBDayPlatform.Service.PersonService.GetPersonsService;
+using GetUpcommingBirthDaysServiceDto = CegekaBDayPlatform.Service.PersonService.GetUpcommingBirthDaysService;
+using UpdatePersonServiceDto = CegekaBDayPlatform.Service.PersonService.UpdatePersonService;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using CegekaBDayPlatform.Service.PersonService.CreatePersonService;
+using CegekaBDayPlatform.Service.PersonService.DeletePersonService;
+using CegekaBDayPlatform.Service.PersonService.GetPersonsService;
+using CegekaBDayPlatform.Service.PersonService.GetUpcommingBirthDaysService;
+using CegekaBDayPlatform.Service.PersonService.UpdatePersonService;
 
 namespace CegekaBDayPlatform.Controllers
 {
     [Route("api/persons")]
     public class PersonController : Controller
     {
-        private static PersonService _service;
+        private CegekaBDayPlatformContext _context;
 
         public PersonController(CegekaBDayPlatformContext context)
         {
-            _service = new PersonService(context);
+            _context = context;
         }
 
         // GET api/persons
         [HttpGet("")]
         public IActionResult GetAll()
         {
-            return new ObjectResult(_service.GetAllPersons());
+            var service = new GetPersonsService(_context);
+            var request = new GetPersonsServiceDto.RequestDto();
+            return new ObjectResult(service.Process(request));
         }
 
         // GET api/persons/Upcomming
         [HttpGet("Upcomming")]
         public IActionResult Upcomming()
         {
-            return new ObjectResult(_service.GetUpcommingBirthDays(2));
+            var request = new GetUpcommingBirthDaysServiceDto.RequestDto { NumberOfPersons = 2 };
+            var service = new GetUpcommingBirthDaysService(_context);
+            return new ObjectResult(service.Process(request));
         }
 
-        // POST api/person/Upcomming
+        // POST api/persons/Upcomming
         [HttpPost("Upcomming")]
-        public IActionResult Upcomming([FromBody]int count)
+        public IActionResult Upcomming([FromBody]GetUpcommingBirthDaysServiceDto.RequestDto value)
         {
-            return new ObjectResult(_service.GetUpcommingBirthDays(count));
+            var service = new GetUpcommingBirthDaysService(_context);
+            return new ObjectResult(service.Process(value));
         }
 
         // POST api/persons
         [HttpPost("")]
-        public IActionResult Create([FromBody]Person value)
+        public IActionResult Create([FromBody]CreatePersonServiceDto.RequestDto value)
         {
-            return new ObjectResult(_service.CreatePerson(value));
+            var service = new CreatePersonService(_context);
+            return new ObjectResult(service.Process(value));
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(Guid id, [FromBody]Person value)
+        public IActionResult Update(Guid id, [FromBody]UpdatePersonServiceDto.RequestDto value)
         {
             value.Id = id;
-            return new ObjectResult(_service.UpdatePerson(value));
+            var service = new UpdatePersonService(_context);
+            return new ObjectResult(service.Process(value));
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            return new ObjectResult(_service.DeletePerson(id));
+            var request = new DeletePersonServiceDto.RequestDto { Id = id };
+            var service = new DeletePersonService(_context);
+            return new ObjectResult(service.Process(request));
         }
 
     }

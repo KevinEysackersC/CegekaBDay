@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using CegekaBDayPlatform.Model;
-using SQLitePCL;
 
-namespace CegekaBDayPlatform.Service
+namespace CegekaBDayPlatform.Repository
 {
-    public class PersonService
+    public class PersonRepository
     {
         private CegekaBDayPlatformContext _context;
 
-        public PersonService(CegekaBDayPlatformContext context)
+        public PersonRepository(CegekaBDayPlatformContext context)
         {
             _context = context;
         }
@@ -24,11 +23,6 @@ namespace CegekaBDayPlatform.Service
             if (success != 1) person = null;
             return person;
         }
-
-        //public void FixGewoonNeNaam()
-        //{
-        //    var instance = System.Data.Entity.SqlServer.SqlProviderServices.Instance;
-        //}
 
         public Person GetPerson(Guid id)
         {
@@ -58,7 +52,7 @@ namespace CegekaBDayPlatform.Service
                     p.DateOfBirth.Month * 100 + p.DateOfBirth.Day <
                     DateTime.Today.Month * 100 + DateTime.Today.Day)
                     .OrderBy(p => p.DateOfBirth.Month * 100 + p.DateOfBirth.Day)
-                    .Take(count)
+                    .Take(count - persons.Count)
                     .ToList();
 
                 persons.AddRange(temp2);
