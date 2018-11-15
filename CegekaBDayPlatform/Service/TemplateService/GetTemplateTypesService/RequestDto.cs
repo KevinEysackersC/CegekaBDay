@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CegekaBDayPlatform.Service.TemplateService.GetTemplatesService
+namespace CegekaBDayPlatform.Service.TemplateService.GetTemplateTypesService
 {
     public class RequestDto
     {

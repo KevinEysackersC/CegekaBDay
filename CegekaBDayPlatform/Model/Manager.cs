@@ -11,8 +11,9 @@ namespace CegekaBDayPlatform.Model
         public Guid? Id { get; set; }
         [Required]
         public Guid PersonId { get; set; }
-        [NotMapped]
+        [ForeignKey("PersonId")]
         public Person Person { get; set; }
+        [InverseProperty("Manager")]
         public ICollection<Person> Persons { get; set; }
     }
 }

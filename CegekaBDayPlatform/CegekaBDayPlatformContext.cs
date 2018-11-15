@@ -15,5 +15,12 @@ namespace CegekaBDayPlatform
         public CegekaBDayPlatformContext(DbContextOptions<CegekaBDayPlatformContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Manager>()
+                .HasAlternateKey(m => m.PersonId)
+                .HasName("AlternateKey_PersonId");
+        }
     }
 }

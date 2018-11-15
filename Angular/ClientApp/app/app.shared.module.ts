@@ -12,14 +12,17 @@ import { PersonComponent } from './components/person/person.component';
 import { PersonService } from './Service/person.service';
 import { MyDatePickerModule } from 'mydatepicker';
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { ManagerComponent } from './Components/manager/manager.component';
+import { ManagerService } from './Service/manager.service';
 
-@
-NgModule({
+
+@NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
         DashboardComponent,
-        PersonComponent
+        PersonComponent,
+        ManagerComponent
     ],
     imports: [
         CommonModule,
@@ -30,12 +33,13 @@ NgModule({
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: DashboardComponent },
             { path: 'persons', component: PersonComponent },
+            { path: 'managers', component: ManagerComponent },
             { path: '**', redirectTo: 'dashboard' }
         ]),
         MyDatePickerModule,
         Ng2Bs3ModalModule
     ],
-    providers: [PersonService],
+    providers: [PersonService, ManagerService],
 })
 export class AppModuleShared {
 }

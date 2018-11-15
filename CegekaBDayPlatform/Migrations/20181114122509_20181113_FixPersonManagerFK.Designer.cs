@@ -11,9 +11,10 @@ using System;
 namespace CegekaBDayPlatform.Migrations
 {
     [DbContext(typeof(CegekaBDayPlatformContext))]
-    partial class CegekaBDayPlatformContextModelSnapshot : ModelSnapshot
+    [Migration("20181114122509_20181113_FixPersonManagerFK")]
+    partial class _20181113_FixPersonManagerFK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,8 +30,7 @@ namespace CegekaBDayPlatform.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasAlternateKey("PersonId")
-                        .HasName("AlternateKey_PersonId");
+                    b.HasIndex("PersonId");
 
                     b.ToTable("Managers");
                 });

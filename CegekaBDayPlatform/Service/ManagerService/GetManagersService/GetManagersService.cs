@@ -21,7 +21,10 @@ namespace CegekaBDayPlatform.Service.ManagerService.GetManagersService
                 var r = new ManagerResponse
                 {
                     Id = p.Id,
-                    PersonId = p.PersonId
+                    PersonId = p.PersonId,
+                    Name = p.Person.Name,
+                    FirstName = p.Person.FirstName,
+                    PersonCount = p.Persons.Count
                 };
                 managerResult.Add(r);
             }

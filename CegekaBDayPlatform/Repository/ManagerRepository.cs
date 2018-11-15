@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CegekaBDayPlatform.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace CegekaBDayPlatform.Repository
 {
@@ -30,7 +31,10 @@ namespace CegekaBDayPlatform.Repository
 
         public List<Manager> GetAll()
         {
-            return _context.Managers.ToList();
+            return _context.Managers
+                .Include(p => p.Person)
+                .Include(ps => ps.Persons)
+                .ToList();
         }
 
         public Manager Delete(Guid id)
@@ -39,7 +43,7 @@ namespace CegekaBDayPlatform.Repository
             if (manager != null)
             {
                 _context.Managers.Attach(manager);
-                _context.Entry(manager).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                _context.Entry(manager).State = EntityState.Deleted;
                 _context.SaveChanges();
             }
             return _context.Managers.FirstOrDefault(s => s.Id == id);

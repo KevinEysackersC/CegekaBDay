@@ -10,6 +10,28 @@
   <ItemGroup>
     <Compile Remove="Migrations\20181107145043_20181107_AdjustManager.cs" />
     <Compile Remove="Migrations\20181107145043_20181107_AdjustManager.Designer.cs" />
+    <Compile Remove="Migrations\20181113151457_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181113151457_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181113153733_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181113153733_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181113154006_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181113154006_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181113155852_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181113155852_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114101557_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114101557_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114101922_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114101922_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114110434_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114110434_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114110540_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114110540_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114110935_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114110935_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114122354_20181113_FixPersonManagerFK.cs" />
+    <Compile Remove="Migrations\20181114122354_20181113_FixPersonManagerFK.Designer.cs" />
+    <Compile Remove="Migrations\20181114125303_20181113_FixPersonManagerFK2.cs" />
+    <Compile Remove="Migrations\20181114125303_20181113_FixPersonManagerFK2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

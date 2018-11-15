@@ -17,7 +17,10 @@ namespace CegekaBDayPlatform.Service.ManagerService.GetService
             var result = new ResponseDto
             {
                 Id = manager.Id,
-                PersonId = manager.PersonId
+                PersonId = manager.PersonId,
+                Name = manager.Person.Name,
+                FirstName = manager.Person.FirstName,
+                PersonCount = manager.Persons.Count
             };
             return result;
         }

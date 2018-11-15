@@ -3,7 +3,9 @@
     firstName: string,
     name: string,
     dateOfBirth: Date,
-    birthdayToday: Boolean
+    birthdayToday: Boolean,
+    managerId: string,
+    manager: string
 }
 
 export interface IPersons {

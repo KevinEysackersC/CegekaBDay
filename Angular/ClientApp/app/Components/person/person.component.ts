@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PersonService } from '../../Service/person.service';
+import { ManagerService } from '../../Service/manager.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { IPerson } from '../../Models/person';
+import { IManager } from '../../Models/manager';
 import { DBOperation } from '../../Shared/enum';
 import { Observable } from 'rxjs/Rx';
 import { Global } from '../../Shared/global';
@@ -25,15 +27,21 @@ export class PersonComponent implements OnInit {
     modalTitle: string | undefined;
     modalBtnTitle: string | undefined;
     currentDate: Date = new Date();
+    managers: IManager[] | undefined;
+    manager: IManager | undefined;
 
-    constructor(private fb: FormBuilder, private _personService: PersonService) {
+    constructor(private fb: FormBuilder, private _personService: PersonService, private _managerService: ManagerService) {
         this.personFrm = this.fb.group({
             id: [''],
             firstName: ['', Validators.required],
             name: ['', Validators.required],
-            dateOfBirth: ['', Validators.required]
+            dateOfBirth: ['', Validators.required],
+            managerId: [''],
+            manager: ['']
         });
+        this.loadManagers();
         this.loadPersons();
+
     }
 
     public myDatePickerOptions: IMyDpOptions = {
@@ -64,13 +72,45 @@ export class PersonComponent implements OnInit {
 
     loadPersons(): void {
         this.indLoading = true;
+        this.managers;
+
         this._personService.get("http://localhost:60324/api/persons")
             .subscribe(persons => {
                 this.persons = persons.persons;
                 this.indLoading = false;
+
                 persons.persons.sort((a: any, b: any) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+
+                this.matchManagersOnPerson();
             },
                 error => this.msg = <any>error);
+    }
+
+    loadManagers(): void {
+        this.indLoading = true;
+        this._managerService.get("http://localhost:60324/api/managers")
+            .subscribe(managers => {
+                this.managers = managers.managers;
+                this.indLoading = false;
+                managers.managers.sort((a: any, b: any) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);
+
+                this.matchManagersOnPerson();
+            },
+                error => this.msg = <any>error);
+    }
+
+    matchManagersOnPerson() {
+        if (this.persons != undefined) {
+            (this.persons).forEach((person) => {
+                if (this.managers != undefined) {
+                    var man: IManager;
+                    man = (this.managers).filter(m => m.id == person.managerId)[0];
+                    if (man != undefined) {
+                        person.manager = `${man.name} ${man.firstName}`;
+                    }
+                }
+            }, this);
+        }
     }
 
     setControlsState(isEnable: boolean) {

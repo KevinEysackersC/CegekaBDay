@@ -16,8 +16,8 @@ namespace CegekaBDayPlatform.Service.TemplateService.GetService
             var manager = _managerRepository.Get(request.Id);
             var result = new ResponseDto
             {
-                Id = manager.Id,
-                PersonId = manager.PersonId
+                Id = manager.Id
+                //PersonId = manager.PersonId
             };
             return result;
         }
